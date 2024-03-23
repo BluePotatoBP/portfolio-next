@@ -9,6 +9,8 @@
 	--secondary-color: #e0e0e0;
 	--secondary-hsl: hsl(225, 19%, 80%);
 
+	--special-accent-color: rgb(255, 228, 196);
+
 	--background-color: #121313;
 	--background-light-color: #222222;
 
@@ -24,7 +26,7 @@
 @media (prefers-color-scheme: dark) {
 	:root {
 		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
+		--background-start-rgb: 20, 20, 20;
 		--background-end-rgb: 0, 0, 0;
 	}
 }
@@ -90,6 +92,7 @@ h2 {
 p {
 	display: flex;
 	flex-direction: row;
+	gap: 0.3rem;
 }
 
 details {
@@ -114,7 +117,7 @@ details summary {
 
 details[open] summary {
 	margin-bottom: 1.25rem;
-	background-color: bisque;
+	background-color: var(--special-accent-color);
 	border-bottom-left-radius: 1rem;
 	border-bottom-right-radius: 1rem;
 	color: var(--primary-dark-color);
@@ -122,6 +125,10 @@ details[open] summary {
 
 ul {
 	padding-left: 2rem;
-	color: bisque;
+	color: var(--special-accent-color);
 	opacity: 0.8;
+}
+
+a {
+	color: var(--special-accent-color);
 }
