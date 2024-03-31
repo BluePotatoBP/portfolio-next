@@ -1,7 +1,7 @@
-export default function Projects() {
+export default function Playground() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1>Projects</h1>
+			<h1>Playground</h1>
 		</main>
 	)
 }

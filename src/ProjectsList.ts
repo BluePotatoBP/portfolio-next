@@ -7,9 +7,9 @@ interface Project {
 	tags: string[];
 	featured?: boolean;
 	hidden?: boolean;
-  }
+}
 
-const projects: { [key: string]: Project} = {
+const projects: { [key: string]: Project; } = {
 	likealight: {
 		name: "likealight",
 		decoName: "Like A Light",
@@ -55,7 +55,7 @@ const projects: { [key: string]: Project} = {
 		thumbnail: "clown_transform.gif",
 		repo: "",
 		tags: ["<", ">"],
-		hidden: false,
+		hidden: true,
 	},
 };
 
@@ -65,10 +65,10 @@ const projects: { [key: string]: Project} = {
 export function getProjects(showHidden = false): Project[] {
 	let filteredProjects = Object.values(projects).filter((p) => {
 		if (showHidden) return p;
-		return p && !p.hidden
-	})
-	
-	return filteredProjects
+		return p && !p.hidden;
+	});
+
+	return filteredProjects;
 }
 
 export function getProject(name: string): Project | undefined {

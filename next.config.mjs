@@ -4,11 +4,17 @@ const nextConfig = {
 		return [
 			{
 				source: '/project',
-				destination: '/projects',
+				destination: '/#projects',
+				permanent: true
+			},
+			{
+				source: '/projects',
+				destination: '/#projects',
 				permanent: true
 			}
 		]
-	}
+	},
+	reactStrictMode: true
 };
 
 export default nextConfig;

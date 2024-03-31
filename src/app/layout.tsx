@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 
-import NavBar from "@/app/components/one-hit-wonder/Navbar/Navbar";
+import Navbar from "@/app/components/one-hit-wonder/Navbar/Navbar";
+import Footer from "@/app/components/one-hit-wonder/Footer/Footer";
 
 const roboto = Roboto({ weight: ["400"], subsets: ["latin"] });
 
@@ -17,8 +18,9 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 	return (
 		<html lang="en">
 			<body className={roboto.className}>
-				<NavBar />
-				<main>{children}</main>
+				<Navbar />
+				<main className="pt-8">{children}</main>
+				<Footer />
 			</body>
 		</html>
 	);

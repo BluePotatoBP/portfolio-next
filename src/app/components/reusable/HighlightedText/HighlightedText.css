@@ -1,0 +1,30 @@
+.highlighted-text-container {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.2rem;
+	border-radius: 0.2rem;
+	font-weight: 500;
+	text-decoration: none;
+	overflow: hidden;
+}
+
+.highlighted-img {
+	display: inline-block;
+	width: 1.1rem;
+	height: inherit;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.highlighted-img img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	user-select: none;
+}
+
+.highlighted-text {
+	font-size: inherit;
+	line-height: inherit;
+}

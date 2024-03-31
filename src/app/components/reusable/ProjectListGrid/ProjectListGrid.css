@@ -1,0 +1,36 @@
+.projects-list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgba(33, 40, 61, 0.8);
+	padding-bottom: 5rem;
+}
+
+.projects-list-items {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	min-width: 80%;
+	max-width: 80%;
+	gap: 1rem;
+}
+
+.load-more-btn {
+	background-color: var(--primary-color);
+	color: var(--secondary-color);
+	border: none;
+	border-radius: 0.5rem;
+	padding: 0.5rem 0.5rem;
+	margin: 1rem;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	line-height: 0;
+}
+
+.load-more-btn:hover {
+	background-color: var(--secondary-color);
+	color: var(--primary-color);
+}

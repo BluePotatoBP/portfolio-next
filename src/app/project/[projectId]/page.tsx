@@ -31,8 +31,7 @@ export default async function ProjectDetails({ params }: { params: { projectId: 
 		<main className="flex w-full min-h-screen flex-col items-center justify-center p-24">
 			<h1 className='text-5xl font-black tracking-widest pb-8'>{params.projectId.toLocaleUpperCase()}</h1>
 			<Suspense fallback={<>Loading...</>}>
-				<ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeReact]} children={markdown} 
-				className='flex justify-start flex-col gap-2' />
+				<ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeReact]} className='flex justify-start flex-col gap-2'>{markdown}</ReactMarkdown>
 			</Suspense>
 		</main>
 	)

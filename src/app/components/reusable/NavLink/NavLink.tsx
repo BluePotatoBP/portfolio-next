@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { FC } from 'react';
 
 interface NavigationLinkProps {
 	to: string;
 	children: React.ReactNode;
 }
 
-const NavLink: FC<NavigationLinkProps> = ({ to, children }) => {
+const NavLink: React.FC<NavigationLinkProps> = ({ to, children }) => {
 	const isActive = usePathname() === to;
   
 	return (

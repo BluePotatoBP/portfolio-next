@@ -5,7 +5,8 @@ import AnimatedIcon from '@/app/components/reusable/AnimatedIcon/AnimatedIcon';
 import NavLink from '@/app/components/reusable/NavLink/NavLink'
 import SearchBar from '@/app/components/reusable/SearchBar/SearchBar';
 
-import { MdPermContactCalendar, MdSpaceDashboard } from 'react-icons/md';
+import { MdPermContactCalendar } from 'react-icons/md';
+import { AiFillExperiment } from "react-icons/ai";
 import { FiExternalLink } from 'react-icons/fi';
 import './Navbar.css';
 
@@ -35,9 +36,9 @@ const NavBar = () => {
 						<MdPermContactCalendar className='icon' />
 						<div className="link-text">Contact</div>
 					</NavLink>
-					<NavLink to="/projects" >
-						<MdSpaceDashboard className='icon' />
-						<div className="link-text">Projects</div>
+					<NavLink to="/playground" >
+						<AiFillExperiment className='icon' />
+						<div className="link-text">Playground</div>
 					</NavLink>
 					<a href="https://github.com/bluepotatobp/portfolio-website" draggable={false} target="_blank" rel='noreferrer' className="link outgoing">
 						<FiExternalLink className='icon' />

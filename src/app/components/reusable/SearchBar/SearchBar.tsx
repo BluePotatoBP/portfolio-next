@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from "react"
 import { getProjects } from "../../../../ProjectsList";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from 'next/image';
 
 import { FaSearch } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
@@ -22,10 +22,11 @@ interface Project {
 }
 
 const SearchBar: React.FC = () => {
+	const location = usePathname();
 	// Requesting the projects list
 	const [inputItems, setInputItems] = useState<Project[]>([]);
 	useEffect(() => {
-		setInputItems(getProjects());
+		setInputItems(getProjects(true));
 	}, []);
 	const hasProjects = Object.keys(inputItems).length > 0;
 
@@ -43,18 +44,19 @@ const SearchBar: React.FC = () => {
 		if (!inputExists) return [];
 		// Otherwise filter the projects
 		const inputArray = Object.values(inputItems);
+
 		const filteredProjects = inputArray.filter((project) => {
 			// Formatting inputs
 			const projectNameFormatted = project.decoName.toLowerCase().split(" ").join("");
 			const searchValueFormatted = searchValue.toLowerCase().split(" ").join("");
 			if (searchValueFormatted === "") return false;
-			// Filtering by name and decoName
-			if (!project.hidden && projectNameFormatted.includes(searchValueFormatted) || project.name.toLowerCase().includes(searchValueFormatted)) return true;
-			// Filtering by tags
-			for (let i = 0; i < project.tags.length; i++) {
-				if (project.tags[i].toLowerCase().includes(searchValueFormatted)) return true;
-			}
-			// If no match return false
+
+			// Filtering by name, decoName and tags
+			if ((projectNameFormatted.includes(searchValueFormatted) ||
+				project.name.toLowerCase().includes(searchValueFormatted) ||
+				project.tags.some((tag) => tag.toLowerCase().includes(searchValueFormatted)))
+			) return true;
+
 			return false;
 		});
 
@@ -67,16 +69,16 @@ const SearchBar: React.FC = () => {
 	const searchContainer = useRef<HTMLDivElement>(null);
 	const handleBlur = (event: any) => {
 		if (searchContainer.current && !searchContainer.current.contains(event.relatedTarget)) setFocused(false);
-	  };
+	};
 
 	useEffect(() => {
 		const searchInput = document.querySelector('.search-input');
 		searchInput?.addEventListener('blur', handleBlur);
-	  
+
 		return () => {
-		  searchInput?.removeEventListener('blur', handleBlur);
+			searchInput?.removeEventListener('blur', handleBlur);
 		};
-	  }, []);
+	}, []);
 
 	// Getting elements reference for later use
 	const searchInput = useRef<HTMLInputElement>(null);
@@ -111,7 +113,7 @@ const SearchBar: React.FC = () => {
 				else if (userAgent.includes("Linux")) OS = "Linux";
 				else OS = "Windows";
 
-				const actionKey: { [key: string]: string } = {
+				const actionKey: { [key: string]: string; } = {
 					"Windows": "Ctrl",
 					"MacOS": "⌘",
 					"Linux": "Ctrl"
@@ -173,73 +175,72 @@ const SearchBar: React.FC = () => {
 		}
 	}, [searchInput, focused, searchValue, searchItems, projectList, inputExists]);
 
-	// Search shortcut (Ctrl + K)
-	// There is a way to make this cross compatible with other keyboard layouts, but I dont think its necessary for my page
-	// https://developer.mozilla.org/en-US/docs/Web/API/Keyboard/getLayoutMap
-	const focusToggleCallback = (event: KeyboardEvent) => {
-		if ((event.metaKey || event.ctrlKey) && event.code === 'KeyK') {
-			event.preventDefault();
-			if (focused) {
-				searchInput.current!.blur();
-			} else {
-				searchInput.current!.focus();
-			}
-		}
-	};
-
 	useEffect(() => {
+		// Search shortcut (Ctrl + K)
+		// There is a way to make this cross compatible with other keyboard layouts, but I dont think its necessary for my page
+		// https://developer.mozilla.org/en-US/docs/Web/API/Keyboard/getLayoutMap
+		const focusToggleCallback = (event: KeyboardEvent) => {
+			if ((event.metaKey || event.ctrlKey) && event.code === 'KeyK') {
+				event.preventDefault();
+				if (focused) {
+					searchInput.current!.blur();
+				} else {
+					searchInput.current!.focus();
+				}
+			}
+		};
+
 		document.addEventListener('keydown', focusToggleCallback);
 		return () => document.removeEventListener('keydown', focusToggleCallback);
 	}, [focused, searchInput]);
 
-	// Clear input shortcut (Ctrl + U)
-	const clearCallback = (event: KeyboardEvent) => {
-		if ((event.metaKey || event.ctrlKey) && event.code === 'KeyU') {
-			event.preventDefault();
-			handleInputClear();
-		}
-	};
-
 	useEffect(() => {
+		// Clear input shortcut (Ctrl + U)
+		const clearCallback = (event: KeyboardEvent) => {
+			if ((event.metaKey || event.ctrlKey) && event.code === 'KeyU') {
+				event.preventDefault();
+				handleInputClear();
+			}
+		};
+
 		document.addEventListener('keydown', clearCallback);
 		return () => document.removeEventListener('keydown', clearCallback);
 	}, [handleInputClear]);
 
-	// Autofocus on searchbar when typing starts
-	const location = usePathname()
-	const autofocusCallback = (event: KeyboardEvent) => {
-		const conditions = [
-			event.metaKey,
-			event.ctrlKey,
-			event.code === 'OSLeft',
-			event.code === 'OSRight',
-			event.code === 'Escape',
-			event.code === 'AltLeft',
-			event.code === 'AltRight',
-			event.code === 'Tab',
-			event.code === 'Home',
-			event.code === 'End',
-			event.code === 'PageUp',
-			event.code === 'PageDown',
-			event.code === 'Insert',
-			event.code === 'Delete',
-			event.code === 'Pause',
-			event.code === 'ScrollLock',
-			event.code === 'ArrowUp',
-			event.code === 'ArrowDown',
-			event.code === 'ArrowLeft',
-			event.code === 'ArrowRight',
-			event.code.match(/F[0-9]/i)
-		];
-
-		if (!conditions.some(condition => condition)) {
-			if (location === "/") {
-				searchInput.current!.focus();
-			}
-		}
-	};
-
 	useEffect(() => {
+		// Autofocus on searchbar when typing starts
+		const autofocusCallback = (event: KeyboardEvent) => {
+			const conditions = [
+				event.metaKey,
+				event.ctrlKey,
+				event.code === 'OSLeft',
+				event.code === 'OSRight',
+				event.code === 'Escape',
+				event.code === 'AltLeft',
+				event.code === 'AltRight',
+				event.code === 'Tab',
+				event.code === 'Home',
+				event.code === 'End',
+				event.code === 'PageUp',
+				event.code === 'PageDown',
+				event.code === 'Insert',
+				event.code === 'Delete',
+				event.code === 'Pause',
+				event.code === 'ScrollLock',
+				event.code === 'ArrowUp',
+				event.code === 'ArrowDown',
+				event.code === 'ArrowLeft',
+				event.code === 'ArrowRight',
+				event.code.match(/F[0-9]/i)
+			];
+
+			if (!conditions.some(condition => condition)) {
+				if (location === "/") {
+					searchInput.current!.focus();
+				}
+			}
+		};
+
 		document.addEventListener('keydown', autofocusCallback);
 		return () => document.removeEventListener('keydown', autofocusCallback);
 	}, [handleInputClear, location]);
@@ -251,9 +252,8 @@ const SearchBar: React.FC = () => {
 			const decoName: string = p.decoName ? p.decoName : "Something went wrong...";
 			const shortDesc: string = p.shortDesc ? p.shortDesc : "Something went wrong...";
 			const thumbnailSrc = p.thumbnail !== '' ?
-				(
-					<Image alt="" draggable={false} src={`/images/${p.thumbnail}`} width="20" height="20" />
-				) : (<MdImageNotSupported className="thumbnail-fallback" />);
+				(<Image alt="" draggable={false} src={`/images/${p.thumbnail}`} unoptimized={p.thumbnail.endsWith('.gif') ? true : false} width="20" height="20" />)
+				: (<MdImageNotSupported className="thumbnail-fallback" />);
 
 			return (
 				<li key={`item${projectList.indexOf(p)}`}>
