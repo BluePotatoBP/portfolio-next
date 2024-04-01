@@ -19,7 +19,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 		<html lang="en">
 			<body className={roboto.className}>
 				<Navbar />
-				<main className="pt-8">{children}</main>
+				<main>{children}</main>
 				<Footer />
 			</body>
 		</html>

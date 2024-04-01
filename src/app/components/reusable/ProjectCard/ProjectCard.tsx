@@ -48,7 +48,7 @@ const ProjectCard: React.FC<DecorationProps> = ({ decoration }) => {
 			: decoration.shortDesc;
 
 	return (
-		<Link href={`/project/${decoration.name}`} className='lg:h-full lg:max-w-[18.5rem] h-48 max-w-[10rem]'>
+		<Link href={`/project/${decoration.name}`} className='lg:h-full lg:max-w-[18.5rem] h-48 max-w-[8.5rem]'>
 			<div className="card-container" ref={cardContainerRef}>
 				<div className="card lg:justify-start justify-between" ref={cardRef}>
 					<div className="thumbnail-container lg:pb-[50%] pb-[60%]" style={{ backgroundImage: `url(/images/${decoration.thumbnail || "/missing.svg"})` }} />
