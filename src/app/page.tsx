@@ -31,8 +31,8 @@ const Home = () => {
 			<div className="projects-main-display">
 				<div className="featured-list">
 					<div className="title-large featured">Featured Projects</div>
-					<div className="title-text">Some of the projects I had tons of fun working on!</div>
-					<div className="featured-list-items">{listProjects(3, true)}</div>
+					<div className="title-text lg:w-full max-w-[80vw]">Some of the projects I had tons of fun working on!</div>
+					<div className="featured-list-items flex flex-row lg:gap-4 gap-2">{listProjects(3, true)}</div>
 					<div className="slope-shape-divider">
 						<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
 							<path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" className="shape-fill"></path>
@@ -41,8 +41,8 @@ const Home = () => {
 				</div>
 				<div className="content-paragraph">
 					<div className="content-container">
-						<span className="bottom-paragraph-text text-justify">
-							<Image className="float-left mr-8" src='./images/myNameIs.svg' draggable="false" alt="My name is Leon" width={200} height={200} />
+						<span className="bottom-paragraph-text text-justify lg:max-w-[40vw] lg:text-2xl max-w-[80vw] text-md">
+							<Image className="float-left lg:mr-2 lg:w-48 mr-2 w-32 h-auto" src='./images/myNameIs.svg' draggable="false" alt="My name is Leon" width={200} height={200} />
 							or <HighlightedText text={"BluePotatoBP"} image={PFP} link="/contact" /> online.
 							I started learning JS with NodeJS in middle school, made a discord bot to help me with reminders
 							which later turned into a more general use bot, and after ~three years of casual
@@ -51,7 +51,7 @@ const Home = () => {
 							and
 							<HighlightedText text={"VOID"} image={VOID_LOGO} link="project/void" />.
 							I&apos;m a huge fan of practical apps, and not wasting time. A bit of styling doesn&apos;t
-							hurt either. Have a looksey at my projects:
+							hurt either. <HighlightedText text={"Have a looksey at my projects below."} link="#projects" underline={true} />
 						</span>
 					</div>
 					<ImageGallery images={imagesList} />

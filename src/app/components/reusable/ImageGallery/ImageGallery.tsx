@@ -102,11 +102,11 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images = [], autoplaySpeed = 4000
 
 	return (
 		<div className="image-carousel">
-			<div className="inner-card flex flex-col gap-5">
-				<div className="slides-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ transform: `translateX(${-currentIndex * 100}%)`, transitionDuration: "0.8s" }}>
+			<div className="inner-card flex flex-col justify-between gap-5 max-w-fit lg:w-[20rem] lg:h-[25rem]">
+				<div className="slides-container flex" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ transform: `translateX(${-currentIndex * 100}%)`, transitionDuration: "0.8s" }}>
 					{images.map((image, index) => (<GalleryImageSlide key={index} image={image} active={index === currentIndex} />))}
 				</div>
-				<div className="controls flex flex-row justify-between items-center text-center rounded-full bg-[var(--primary-color)]">
+				<div className="controls flex flex-row justify-between items-center text-center rounded-full bg-[var(--primary-color)] min-h-16">
 					<button className="control-btn prev leading-0 border-none text-slate-200 text-base rounded-full transition-all hover:bg-slate-500" onClick={handlePrevClick} aria-label="previous">◀</button>
 					{renderDynamicControls()}
 					<button className="control-btn next leading-0 border-none text-slate-200 text-base rounded-full transition-all hover:bg-slate-500" onClick={handleNextClick} aria-label="next">▶</button>

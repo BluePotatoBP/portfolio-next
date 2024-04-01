@@ -27,7 +27,7 @@ const ProjectListGrid = () => {
 	return (
 		<div className="projects-list">
 			<h1 className="title-large tracking-widest max-w-[80%]" id="projects">ALL PROJECTS</h1>
-			<div className="projects-list-items">
+			<div className="projects-list-items flex flex-row lg:gap-4 gap-2">
 				{listProjects(displayedProjects)}
 			</div>
 			{displayedProjects < projects.length && (

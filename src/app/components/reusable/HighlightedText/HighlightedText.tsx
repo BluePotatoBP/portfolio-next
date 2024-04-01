@@ -1,6 +1,5 @@
-import "./HighlightedText.css";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from 'next/image';
 
 interface HighlightedTextProps {
 	text: string;
@@ -13,6 +12,7 @@ interface HighlightedTextProps {
 	padding?: string;
 	margin?: string;
 	borderRadius?: string;
+	underline?: boolean;
 }
 
 const HighlightedText: React.FC<HighlightedTextProps> = (
@@ -26,34 +26,34 @@ const HighlightedText: React.FC<HighlightedTextProps> = (
 		textShadowSize = "10px",
 		padding = "0 0.5rem 0 0.5rem",
 		margin = "0 0.2rem 0 0.2rem",
-		borderRadius = "0.5rem"
+		borderRadius = "0.5rem",
+		underline = false
 	}
 ) => {
-	const textShadowStyle = textShadowColor ? `1px 1px ${textShadowSize} ${textShadowColor}` : ""
-	const styling = { backgroundColor: backgroundColor, color: textColor, padding: padding, margin: margin, borderRadius: borderRadius }
 
+	const textShadowStyle = textShadowColor ? `1px 1px ${textShadowSize} ${textShadowColor}` : "";
+	const styling = { backgroundColor: backgroundColor, color: textColor, padding: padding, margin: margin, borderRadius: borderRadius, underline: underline };
+	const tailwindStyling = `highlighted-text-container inline-flex justify-between items-center gap-2 rounded-md font-medium overflow-hidden`;
 	const imageElement = (
 		<div className="highlighted-img">
-			<Image src={`${image as string}`} alt="highlighted" draggable={false} width={25} height={25} />
+			{image && <Image className="block h-[0.8rem] w-auto rounded-full object-cover select-none" src={image} alt="highlighted" draggable={false} width={10} height={10} />}
 		</div>
-	)
+	);
 
-	// If theres a link use react router
-	if (link) {
-		return (
-			<Link href={link ? link : ""} className="highlighted-text-container" style={styling}>
-				{image ? imageElement : null}
-				<div className="highlighted-text" style={{ textShadow: textShadowStyle }}>{text}</div>
-			</Link>
-		);
-	} else {
-		return (
-			<div className="highlighted-text-container" style={styling}>
-				{image ? imageElement : null}
-				<div className="highlighted-text" style={{ textShadow: textShadowStyle }}>{text}</div>
-			</div>
-		);
-	}
+	if (link) return (
+		<Link href={link ? link : ""} className={tailwindStyling} style={styling}>
+			{image ? imageElement : null}
+			<div className="highlighted-text text-xl" style={{ textShadow: textShadowStyle }}>{text}</div>
+		</Link>
+	);
+
+	return (
+		<div className={tailwindStyling} style={styling}>
+			{image ? imageElement : null}
+			<div className="highlighted-text text-xl" style={{ textShadow: textShadowStyle }}>{text}</div>
+		</div>
+	);
+
 };
 
 export default HighlightedText;
