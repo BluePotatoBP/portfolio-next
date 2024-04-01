@@ -5,7 +5,7 @@ import AnimatedIcon from '@/app/components/reusable/AnimatedIcon/AnimatedIcon';
 import NavLink from '@/app/components/reusable/NavLink/NavLink'
 import SearchBar from '@/app/components/reusable/SearchBar/SearchBar';
 
-import { MdPermContactCalendar } from 'react-icons/md';
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { AiFillExperiment } from "react-icons/ai";
 import { FiExternalLink } from 'react-icons/fi';
 import './Navbar.css';
@@ -33,7 +33,7 @@ const NavBar = () => {
 			<div className="navbar-helper-container">
 				<div className='navbar-links'>
 					<NavLink to="/contact" >
-						<MdPermContactCalendar className='icon' />
+						<BiSolidMessageSquareDetail className='icon' />
 						<div className="link-text">Contact</div>
 					</NavLink>
 					<NavLink to="/playground" >
