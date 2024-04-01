@@ -1,6 +1,7 @@
 import "./Home.css";
 
 import { getProjects } from '@/ProjectsList';
+import Image from "next/image";
 import HighlightedText from "@/app/components/reusable/HighlightedText/HighlightedText";
 import ImageGallery from "@/app/components/reusable/ImageGallery/ImageGallery";
 import ProjectCard from "@/app/components/reusable/ProjectCard/ProjectCard";
@@ -8,7 +9,7 @@ import ProjectListGrid from "@/app/components/reusable/ProjectListGrid/ProjectLi
 
 const PFP = "/images/pfp.png";
 const LAL_LOGO = "/images/lalLogo512.png";
-const PORTFOLIO_LOGO = "/images/logo512.png";
+const PORTFOLIO_LOGO = "/images/logoColorized.png";
 const VOID_LOGO = "/images/voidLogo.png";
 const imagesList = [PFP, LAL_LOGO, PORTFOLIO_LOGO, VOID_LOGO];
 const projects = getProjects(false);
@@ -40,13 +41,13 @@ const Home = () => {
 				</div>
 				<div className="content-paragraph">
 					<div className="content-container">
-						<div className="paragraph-title">ABOUT ME</div>
-						<span className="bottom-paragraph-text">
-							Hi! My name is Leon, or <HighlightedText text={"BluePotatoBP"} image={PFP} link="/contact" /> online.
+						<span className="bottom-paragraph-text text-justify">
+							<Image className="float-left mr-8" src='./images/myNameIs.svg' draggable="false" alt="My name is Leon" width={200} height={200} />
+							or <HighlightedText text={"BluePotatoBP"} image={PFP} link="/contact" /> online.
 							I started learning JS with NodeJS in middle school, made a discord bot to help me with reminders
 							which later turned into a more general use bot, and after ~three years of casual
-							development, I decided to expand my knowledge and work on other projects such as
-							<HighlightedText text={"Portfolio Website"} image={PORTFOLIO_LOGO} link="project/portfolio-website" />
+							development I decided to expand my knowledge and work on other projects such as
+							<HighlightedText text={"Portfolio Next"} image={PORTFOLIO_LOGO} link="project/portfolio-next" />
 							and
 							<HighlightedText text={"VOID"} image={VOID_LOGO} link="project/void" />.
 							I&apos;m a huge fan of practical apps, and not wasting time. A bit of styling doesn&apos;t

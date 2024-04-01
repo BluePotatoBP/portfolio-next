@@ -10,8 +10,8 @@
 
 .highlighted-img {
 	display: inline-block;
-	width: 1.1rem;
-	height: inherit;
+	height: 1.3rem;
+	width: auto;
 	border-radius: 50%;
 	overflow: hidden;
 }

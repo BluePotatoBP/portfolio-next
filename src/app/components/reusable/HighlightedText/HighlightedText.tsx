@@ -34,7 +34,7 @@ const HighlightedText: React.FC<HighlightedTextProps> = (
 
 	const imageElement = (
 		<div className="highlighted-img">
-			<Image src={`${image as string}`} alt="highlighted" draggable={false} width={20} height={20} />
+			<Image src={`${image as string}`} alt="highlighted" draggable={false} width={25} height={25} />
 		</div>
 	)
 

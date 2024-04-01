@@ -43,8 +43,8 @@ const ProjectCard: React.FC<DecorationProps> = ({ decoration }) => {
 			? `${decoration.decoName.substring(0, 20)}...`
 			: decoration.decoName;
 	const croppedDesc =
-		decoration.shortDesc.length > 42
-			? `${decoration.shortDesc.substring(0, 42)}...`
+		decoration.shortDesc.length > 72
+			? `${decoration.shortDesc.substring(0, 72)}...`
 			: decoration.shortDesc;
 
 	return (
