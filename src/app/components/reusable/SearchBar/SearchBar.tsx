@@ -231,7 +231,7 @@ const SearchBar: React.FC = () => {
 				event.code === 'ArrowDown',
 				event.code === 'ArrowLeft',
 				event.code === 'ArrowRight',
-				event.code.match(/F[0-9]/i)
+				event.code?.match(/F[0-9]/i) || false
 			];
 
 			if (!conditions.some(condition => condition)) {
@@ -282,6 +282,8 @@ const SearchBar: React.FC = () => {
 					placeholder="Search"
 					aria-label="Enter search term"
 					className="search-input"
+					name="search-input"
+					id="search-input"
 					ref={searchInput}
 					value={searchValue}
 					onChange={handleInputChange}
