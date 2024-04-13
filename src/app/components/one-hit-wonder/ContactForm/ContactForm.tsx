@@ -1,7 +1,7 @@
 'use client';
 import { useState, useCallback, useRef, useEffect } from "react";
 import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 
 const ContactForm = () => {
 	const CHARACTER_LIMIT: number = 1000;
@@ -97,45 +97,58 @@ const ContactForm = () => {
 	}, [error]);
 
 	return (
-		<div className="contact-form-container flex flex-col lg:min-w-[50vw] lg:max-w-[50vw] max-w-[80vw] gap-8">
-			<div className="info flex flex-col gap-4">
-				<h2 className="text-4xl font-semibold">Get in touch</h2>
-				<p>You can find me on social platforms or send me a message through the form below.</p>
-			</div>
-			<form className="inputs flex flex-col gap-2" name="contact" id="contact" onSubmit={handleSubmit} ref={formRef}>
-				<input type="text" name="website" value={coolWebsiteFieldThatJustHappensToBeHiddenToHumans} onChange={(e) => setHoomanRadar(e.target.value)} className="hidden" />
-				<input type="email" name="email" autoComplete='email' placeholder="EMAIL" required value={email} onChange={(e) => setEmail(e.target.value)} className="py-4 px-4 rounded-lg text-slate-200 bg-contact-dark-blue" />
-				<textarea name="message" required id="message" placeholder="MESSAGE" value={message} onChange={handleInputChange} maxLength={2000} className="flex pb-32 pt-4 px-4 rounded-lg text-slate-200 resize-none bg-contact-dark-blue"></textarea>
-				<div className={`char-count flex justify-end ${charCount >= 950 ? 'text-red-500 font-bold' : charCount >= 800 ? 'text-lovely-yellow font-medium' : ''}`} ref={countRef} >{charCount}/{CHARACTER_LIMIT}</div>
-				{error && <div className="error-message text-red-500 text-sm">{error}</div>}
-				<div className="button-turnstile flex flex-row justify-between text-center items-center">
-					<motion.button
-						type="submit"
-						className={`flex lg:w-48 w-full ${submitted ? 'bg-lime-600' : 'bg-red-500'} justify-center text-center p-4 rounded-full text-slate-100 font-black tracking-widest`}
-						disabled={submitted}
-						variants={buttonVariants}
-						initial="initial"
-						animate={submitted ? 'bounce' : 'animate'}
-						transition={{
-							type: 'spring',
-							stiffness: 260,
-							damping: 20
-						}}
-					>
-						{submitted ? "GOT IT!" : "SEND MESSAGE"}
-					</motion.button>
-					<Turnstile
-						siteKey={process.env.TURNSTILE_KEY ? process.env.TURNSTILE_KEY : '2x00000000000000000000AB'} // If not set, force a blocked challenge.
-						options={{ language: 'auto', appearance: 'interaction-only', refreshExpired: 'auto' }}
-						as='aside'
-						ref={turnstileRef}
-						scriptOptions={{
-							appendTo: 'body'
-						}}
-					/>
+		<div className="contact-form-container flex flex-col min-w-32 max-w-[80vw] lg:max-w-[60rem] gap-8">
+			<div className="form-container flex flex-col gap-8 bg-black/10 p-4 rounded-[2rem]">
+				<div className="form-inner-styling-container flex flex-col gap-8 bg-black/10 p-4 rounded-2xl">
+					<div className="info flex flex-col gap-4">
+						<h2 className="text-4xl font-semibold">Get in touch</h2>
+						<p>You can find me on social platforms or send me a message through the form below.</p>
+					</div>
+					<form className="inputs flex flex-col gap-2" name="contact" id="contact" onSubmit={handleSubmit} ref={formRef}>
+						<input type="text" name="website" value={coolWebsiteFieldThatJustHappensToBeHiddenToHumans} onChange={(e) => setHoomanRadar(e.target.value)} className="hidden" />
+						<input type="email" name="email" autoComplete='email' placeholder="EMAIL" required value={email} onChange={(e) => setEmail(e.target.value)} className="py-4 px-4 rounded-lg text-slate-200 bg-contact-dark-blue" />
+						<textarea name="message" required id="message" placeholder="MESSAGE" value={message} onChange={handleInputChange} maxLength={2000} className="flex pb-32 pt-4 px-4 rounded-lg text-slate-200 resize-none bg-contact-dark-blue"></textarea>
+						<div className={`char-count flex justify-end ${charCount >= 950 ? 'text-red-500 font-bold' : charCount >= 800 ? 'text-lovely-yellow font-medium' : ''}`} ref={countRef} >{charCount}/{CHARACTER_LIMIT}</div>
+						<AnimatePresence>
+							{
+							error && <motion.div 
+							className="error-message text-red-500 text-sm"
+							initial={{ opacity: 0, scaleY: 0 }}
+							animate={{ opacity: 1, scaleY: 1 }}
+							exit={{ opacity: 0, scaleY: 0 }}
+							>{error}</motion.div>
+							}
+						</AnimatePresence>
+						<div className="button-turnstile flex flex-row justify-between text-center items-center">
+							<motion.button
+								type="submit"
+								className={`flex lg:w-48 w-full ${submitted ? 'bg-lime-600' : 'bg-red-500'} justify-center text-center p-4 rounded-full text-slate-100 font-black tracking-widest`}
+								disabled={submitted}
+								variants={buttonVariants}
+								initial="initial"
+								animate={submitted ? 'bounce' : 'animate'}
+								transition={{
+									type: 'spring',
+									stiffness: 260,
+									damping: 20
+								}}
+							>
+								{submitted ? "GOT IT!" : "SEND MESSAGE"}
+							</motion.button>
+							<Turnstile
+								siteKey={process.env.TURNSTILE_KEY ? process.env.TURNSTILE_KEY : '2x00000000000000000000AB'} // If not set, force a blocked challenge.
+								options={{ language: 'auto', appearance: 'interaction-only', refreshExpired: 'auto' }}
+								as='aside'
+								ref={turnstileRef}
+								scriptOptions={{
+									appendTo: 'body'
+								}}
+							/>
+						</div>
+					</form>
 				</div>
-			</form>
-			<div className="socials flex flex-row gap-4 w-full lg:justify-between justify-center">
+			</div>
+			<div className="socials-container flex flex-row gap-4 w-full lg:justify-between justify-center">
 				<div className="twitter-link flex flex-col">
 					<h5 className="text-slate-400">TWITTER</h5>
 					<a href="https://twitter.com/BluePotatoBP" draggable={false} target="_blank" rel='noreferrer' aria-label="twitter" className="link rounded-full no-underline text-[var(--secondary-color)] transition-[var(--transition)] text-slate-200 hover:text-slate-400">@bluepotatobp</a>

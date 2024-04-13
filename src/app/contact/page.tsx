@@ -4,7 +4,7 @@ import ContactEasterEgg from "@/app/components/one-hit-wonder/ContactEasterEgg/C
 export default function Contact() {
 
 	return (
-		<main className="flex min-h-screen flex-row items-center lg:justify-between justify-center lg:py-32 lg:px-32 pt-64 bg-[#1b1e28]">
+		<main className="flex min-h-screen flex-row items-center lg:justify-evenly justify-center lg:py-32 py-8 md:px-16 px-0 md:pt-32 pt-64 bg-[#1b1e28] lg:gap-8">
 			<div className="left-container">
 				<ContactEasterEgg />
 			</div>
