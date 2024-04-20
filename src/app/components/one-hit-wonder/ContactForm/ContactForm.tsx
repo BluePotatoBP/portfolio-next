@@ -112,14 +112,14 @@ const ContactForm = () => {
 						<AnimatePresence>
 							{
 							error && <motion.div 
-							className="error-message text-red-500 text-sm"
+							className="error-message text-red-500 text-sm text-center"
 							initial={{ opacity: 0, scaleY: 0 }}
 							animate={{ opacity: 1, scaleY: 1 }}
 							exit={{ opacity: 0, scaleY: 0 }}
 							>{error}</motion.div>
 							}
 						</AnimatePresence>
-						<div className="button-turnstile flex flex-row justify-between text-center items-center">
+						<div className="button-turnstile flex lg:flex-row flex-col justify-between text-center items-center gap-4">
 							<motion.button
 								type="submit"
 								className={`flex lg:w-48 w-full ${submitted ? 'bg-lime-600' : 'bg-red-500'} justify-center text-center p-4 rounded-full text-slate-100 font-black tracking-widest`}
@@ -136,7 +136,7 @@ const ContactForm = () => {
 								{submitted ? "GOT IT!" : "SEND MESSAGE"}
 							</motion.button>
 							<Turnstile
-								siteKey={process.env.TURNSTILE_KEY ? process.env.TURNSTILE_KEY : '2x00000000000000000000AB'} // If not set, force a blocked challenge.
+								siteKey={process.env.NEXT_PUBLIC_TURNSTILE_KEY ? process.env.NEXT_PUBLIC_TURNSTILE_KEY : '2x00000000000000000000AB'} // If not set, force a blocked challenge.
 								options={{ language: 'auto', appearance: 'interaction-only', refreshExpired: 'auto' }}
 								as='aside'
 								ref={turnstileRef}
