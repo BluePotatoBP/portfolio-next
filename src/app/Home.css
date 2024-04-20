@@ -79,12 +79,6 @@
 /********* Bottom Container *********/
 
 .content-paragraph {
-	display: flex;
-	flex-direction: row;
-	position: relative;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
 	padding: 7rem 0 7rem 0;
 	font-size: 1.25rem;
 	font-weight: 400;

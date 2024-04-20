@@ -8,7 +8,7 @@ interface SlideProps {
 
 const GalleryImageSlide: React.FC<SlideProps> = ({ image, active }) => {
 	return (
-		<div className={`slide${active ? " active" : ""}`}>
+		<div className={`slide${active ? " active" : ""} rounded-xl`}>
 			<Image src={image} alt="" width={200} height={200} />
 		</div>
 	);

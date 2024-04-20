@@ -11,10 +11,7 @@ const config: Config = {
 		colors: {
 			"lovely-yellow": "#fdca5d",
 			"contact-dark-blue": "#14161e",
-		},
-      backgroundImage: {
-		/* "contact-pattern": "url('/images/logo.svg)" */
-      },
+		}
     },
   },
   plugins: [],

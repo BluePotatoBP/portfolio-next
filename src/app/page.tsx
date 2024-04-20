@@ -39,8 +39,8 @@ const Home = () => {
 						</svg>
 					</div>
 				</div>
-				<div className="content-paragraph">
-					<div className="content-container">
+				<div className="content-paragraph flex flex-row justify-center lg:gap-32 relative items-center w-full">
+					<div className="content-container 2xl:max-w-[50rem]">
 						<span className="bottom-paragraph-text lg:text-justify lg:max-w-[35vw] lg:text-2xl text-justify max-w-[70vw]">
 							<Image className="float-left lg:mr-8 lg:mb-4 lg:w-48 mr-1 w-[18rem] h-auto lg:-rotate-6 mb-4" src='./images/myNameIs.svg' draggable="false" alt="My name is Leon" width={200} height={200} />
 							or <HighlightedText text={"BluePotatoBP"} image={PFP} link="/contact" /> online.

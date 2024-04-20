@@ -70,8 +70,12 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images = [], autoplaySpeed = 4000
 
 			// If theres more images than max allowed dots, add overflow dots
 			if (images.length > maxPagesToShow) {
-				dots.push(<span key={maxPagesToShow} className={`dot overflow ${currentIndex >= maxPages ? "active" : ""}`}>∙</span>);
-				dots.unshift(<span key={maxPagesToShow + 1} className={`dot overflow ${currentIndex >= maxPages ? "active" : ""}`}>∙</span>);
+				const dotOverflowActive: boolean = currentIndex >= maxPages;
+				const difference: number = Math.floor(images.length - maxPages / 2);
+				const leftActive: boolean = currentIndex <= currentIndex + difference && currentIndex > difference;
+
+				dots.unshift(<span key={maxPagesToShow + 1} className={`overflow-dot text-4xl ${dotOverflowActive && leftActive ? "text-slate-200" : "text-slate-500"}`}>∙</span>);
+				dots.push(<span key={maxPagesToShow} className={`overflow-dot text-4xl ${dotOverflowActive && !leftActive ? "text-slate-200" : "text-slate-500"}`}>∙</span>);
 			}
 
 			return <div className="dot-container flex flex-row justify-center items-center gap-3">{dots}</div>;
@@ -101,9 +105,9 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images = [], autoplaySpeed = 4000
 	}, [currentIndex, isAutoPlaying, stopAutoplay, autoplaySpeed, images.length]);
 
 	return (
-		<div className="image-carousel">
-			<div className="inner-card flex flex-col justify-between gap-5 max-w-fit lg:w-[20rem] lg:h-[25rem]">
-				<div className="slides-container flex" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ transform: `translateX(${-currentIndex * 100}%)`, transitionDuration: "0.8s" }}>
+		<div className="image-carousel rounded-[1.75rem]">
+			<div className="inner-card flex flex-col justify-between max-w-fit lg:w-[20rem] lg:h-[25rem] rounded-2xl p-4 overflow-hidden bg-gradient-to-t from-[#68749999]/60 via-[#9696961a]/10 to-[#9696961a]/10">
+				<div className="slides-container flex transition-transform ease-in-out" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ transform: `translateX(${-currentIndex * 100}%)`, transitionDuration: "0.8s" }}>
 					{images.map((image, index) => (<GalleryImageSlide key={index} image={image} active={index === currentIndex} />))}
 				</div>
 				<div className="controls flex flex-row justify-between items-center text-center rounded-full bg-[var(--primary-color)] min-h-16">

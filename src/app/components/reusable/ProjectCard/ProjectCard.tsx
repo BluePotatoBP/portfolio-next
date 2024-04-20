@@ -49,9 +49,9 @@ const ProjectCard: React.FC<DecorationProps> = ({ decoration }) => {
 
 	return (
 		<Link href={`/project/${decoration.name}`} className='lg:h-full lg:max-w-[18.5rem] h-48 max-w-[8.5rem]'>
-			<div className="card-container" ref={cardContainerRef}>
-				<div className="card lg:justify-start justify-between" ref={cardRef}>
-					<div className="thumbnail-container lg:pb-[50%] pb-[60%]" style={{ backgroundImage: `url(/images/${decoration.thumbnail || "/missing.svg"})` }} />
+			<div className="card-container rounded-[1.75rem]" ref={cardContainerRef}>
+				<div className="card lg:justify-start justify-between rounded-2xl" ref={cardRef}>
+					<div className="thumbnail-container lg:pb-[50%] pb-[60%] rounded-xl" style={{ backgroundImage: `url(/images/${decoration.thumbnail || "/missing.svg"})` }} />
 					<div className="text-container lg:m-4 my-2">
 						<div className="card-title flex flex-row lg:justify-between lg:text-2xl lg:text-start justify-center items-center text-base w-full text-center">{croppedName}<FaArrowRight className='text-base lg:opacity-100 opacity-0 lg:w-auto w-0' /></div>
 						<div className="card-description lg:h-full lg:opacity-100 h-0 opacity-0">{croppedDesc}</div>
