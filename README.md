@@ -1,7 +1,13 @@
 ## Getting Started
 
-First, run the development server:
+Set your environmental variables:
+```js
+GITHUB_TOKEN=
+CLOUDFLARE_SECRET_KEY=
+NEXT_PUBLIC_TURNSTILE_KEY=
+```
 
+Run the development server:
 ```bash
 npm run dev
 # or
